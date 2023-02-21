@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Chat - ArmaMC</title>
+</head>
+<body>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
+        :root {
+            color-scheme: dark;
+        }
+
+        * {
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+    <div id="main">
+        <h1>Crypto Chat</h1>
+        <h2>Para jogadores do ArmaMC</h2>
+        <textarea id="chat" placeholder="Texto Normal"></textarea>
+        <textarea id="text" placeholder="Crypto Chat"></textarea>
+        <br>
+        <button id="r">Converter</button>
+        <button id="c">Reverter</button>
+    </div>
+    <script>
+        function $(id) {return document.querySelector(id)}
+
+        const flip = (data) => Object.fromEntries(
+            Object
+                .entries(data)
+                .map(([key, value]) => [value, key])
+        )
+
+        const upper = (data) => Object.fromEntries(
+            Object
+                .entries(data)
+                .map(([key, value]) => [value.toUpperCase(), key.toUpperCase()])
+        )
+
+        let map = {
+            a: "1",
+            b: "d",
+            c: ")",
+            d: "b",
+            e: "2",
+            f: "f",
+            g: "9",
+            h: "#",
+            i: "3",
+            j: "j",
+            k: "<",
+            l: ">",
+            m: "w",
+            n: "u",
+            o: "4",
+            p: "q",
+            q: "p",
+            r: "r",
+            s: "$",
+            t: "-",
+            u: "5",
+            v: "^",
+            w: "m",
+            x: "x",
+            y: "¨",
+            z: "s"
+        }
+
+        let reverse = flip(map)
+
+        $`#c`.onclick = () => {
+            $`#chat`.value = ($`#text`.value).split("").map(l => reverse[l] ?? l).join("")
+        }
+
+        $`#r`.onclick = () => {
+            $`#text`.value = ($`#chat`.value).split("").map(l => map[l] ?? l).join("")
+        }
+    </script>
+</body>
+</html>
